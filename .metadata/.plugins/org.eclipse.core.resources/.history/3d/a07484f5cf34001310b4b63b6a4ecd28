@@ -1,0 +1,7 @@
+package com.example.netutilssamples;
+
+import android.app.ListActivity;
+
+public class ListWithLogic extends ListActivity {
+
+}

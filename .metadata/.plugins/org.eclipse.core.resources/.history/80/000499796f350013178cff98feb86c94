@@ -1,0 +1,10 @@
+package com.example.netutilssamples;
+
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+import android.app.ListActivity;
+
+public class ComplexStructureActivity extends ListActivity{
+
+}

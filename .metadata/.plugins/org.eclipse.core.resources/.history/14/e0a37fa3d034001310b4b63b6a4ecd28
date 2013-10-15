@@ -1,0 +1,10 @@
+package com.example.netutilssamples.itemviews;
+
+import android.widget.RelativeLayout;
+
+import com.googlecode.androidannotations.annotations.EViewGroup;
+
+@EViewGroup
+public class PersonItemView extends RelativeLayout{
+
+}

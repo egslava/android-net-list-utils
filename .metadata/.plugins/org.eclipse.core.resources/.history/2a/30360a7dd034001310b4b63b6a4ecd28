@@ -1,0 +1,8 @@
+package com.example.netutilssamples.itemviews;
+
+import com.googlecode.androidannotations.annotations.EViewGroup;
+
+@EViewGroup
+public class PersonItemView {
+
+}

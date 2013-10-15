@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;logMessage&apos; from expression &apos;&quot;Can&apos;t convert field &quot; + field.getName() + &quot; to Object[]&quot;&apos;&#x0A;- Original project: &apos;NetUtils&apos;&#x0A;- Variable name: &apos;logMessage&apos;&#x0A;- Destination method: &apos;ru.poloniumarts.netutils.ViewMapper.map()&apos;&#x0A;- Variable expression: &apos;&quot;Can&apos;t convert field &quot; + field.getName() + &quot; to Object[]&quot;&apos;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;logMessage&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;ru.poloniumarts.netutils{ViewMapper.java" name="logMessage" replace="true" selection="8133 57" stamp="1381748581941" version="1.0"/>
+</session>

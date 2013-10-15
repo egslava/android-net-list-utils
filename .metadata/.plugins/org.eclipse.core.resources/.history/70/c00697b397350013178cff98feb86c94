@@ -1,0 +1,22 @@
+package com.example.netutilssamples;
+
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+
+@EActivity
+public class ImageLoadingFallbackURL extends Activity{
+
+}
+
+class URLs{
+	public String realURL;
+	public String unrealURL;
+	
+	public static URLs get(){
+		URLs result = new URLs();
+		result.realURL = "http://www.psdgraphics.com/file/red-heart.jpg";
+		result.unrealURL = "http://blahblahblah.net/blahblahblah.jpg";
+		return result;
+	}
+}

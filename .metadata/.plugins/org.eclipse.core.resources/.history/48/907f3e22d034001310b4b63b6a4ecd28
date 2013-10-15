@@ -1,0 +1,14 @@
+package com.example.netutilssamples;
+
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.ListActivity;
+
+@EActivity
+public class ListWithLogic extends ListActivity {
+	@AfterInject
+	void init(){
+		
+	}
+}

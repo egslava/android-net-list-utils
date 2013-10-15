@@ -1,0 +1,27 @@
+package com.example.netutilssamples;
+
+import ru.poloniumarts.netutils.ViewMapper;
+
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+
+@EActivity
+public class ImageLoadingFallbackURL extends Activity{
+
+	@Bean
+	ViewMapper mapper;
+}
+
+class URLs{
+	public String realURL;
+	public String unrealURL;
+	
+	public static URLs get(){
+		URLs result = new URLs();
+		result.realURL = "http://www.psdgraphics.com/file/red-heart.jpg";
+		result.unrealURL = "http://blahblahblah.net/blahblahblah.jpg";
+		return result;
+	}
+}

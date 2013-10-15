@@ -1,0 +1,24 @@
+package com.example.netutilssamples;
+
+import java.util.List;
+
+import ru.poloniumarts.netutils.ViewMapperAdapter;
+import android.app.ListActivity;
+
+import com.example.netutilssamples.entities.Person;
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+@EActivity
+public class SimpleListActivity extends ListActivity {
+	@Bean
+	ViewMapperAdapter	adapter;
+	
+	@AfterInject
+	void init(){
+		List<Person> people = Person.generatePeople(10000, this);
+		adapter.setObjects(people);
+		setListAdapter(adapter);
+	}
+}

@@ -1,0 +1,22 @@
+package com.example.netutilssamples.itemviews;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.RelativeLayout;
+
+import com.googlecode.androidannotations.annotations.EViewGroup;
+
+@EViewGroup
+public class PersonItemView extends RelativeLayout{
+	public PersonItemView(Context context) {
+		super(context);
+	}
+	public PersonItemView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+	public PersonItemView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+	
+}

@@ -1,0 +1,34 @@
+package com.example.netutilssamples;
+
+import java.util.GregorianCalendar;
+
+import ru.poloniumarts.netutils.ViewMapper;
+import android.app.Activity;
+import android.view.ViewGroup;
+
+import com.example.netutilssamples.entities.Person;
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.Click;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.ViewById;
+
+@EActivity(R.layout.activity_simple_unmapping)
+@OptionsMenu(R.menu.main)
+public class SimpleUnmapping extends Activity {
+	@Bean
+	ViewMapper mapper;
+	
+	@ViewById 
+	ViewGroup root;
+	
+	@Bean
+	Person person;
+	
+	@Click
+	public void showUnmappedUser(){
+		mapper.unmap(root, person);
+		person.alert();
+	}
+}

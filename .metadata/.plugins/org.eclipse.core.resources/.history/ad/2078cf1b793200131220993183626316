@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="It&apos;s somebody resume"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1" >
+
+            <EditText
+                android:id="@+id/$firstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:inputType="textPersonName" >
+
+                <requestFocus />
+            </EditText>
+			<EditText
+                android:id="@+id/$lastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/$firstName"
+                android:ems="10"
+                android:inputType="textPersonName" >
+            </EditText>
+            
+			<EditText
+                android:id="@+id/$middleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/$lastName"
+                android:ems="10"
+                android:inputType="textPersonName" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/$birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/$middleName"
+                android:ems="10"
+                android:editable="false"
+                android:tag="dd.MM.yyyy" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/$firstName"
+                android:layout_alignBottom="@+id/$firstName"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/$firstName"
+                android:text="First name" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/$lastName"
+                android:layout_alignBottom="@+id/$lastName"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/$lastName"
+                android:text="Last name" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/$middleName"
+                android:layout_alignBottom="@+id/$middleName"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/$middleName"
+                android:text="Middle name" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/$birthday"
+                android:layout_alignBottom="@+id/$birthday"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/$birthday"
+                android:text="Birthday" />
+
+            <Button
+                android:id="@+id/showUnmappedUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/textView5"
+                android:text="Show unmapped user" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

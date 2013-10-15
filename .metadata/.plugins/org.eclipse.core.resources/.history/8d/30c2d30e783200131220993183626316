@@ -1,0 +1,71 @@
+package com.example.netutilssamples;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
+import ru.poloniumarts.netutils.ViewMapper;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import com.example.netutilssamples.entities.Person;
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.Click;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.ViewById;
+
+@EActivity(R.layout.activity_simple_unmapping)
+@OptionsMenu(R.menu.main)
+public class SimpleUnmapping extends Activity implements OnDateSetListener {
+	@Bean
+	ViewMapper mapper;
+	
+	@ViewById 
+	ViewGroup root;
+	
+	@ViewById
+	EditText $birthday;
+	
+	@Bean
+	Person person;
+
+	private DatePickerDialog datePickerDialog;
+	
+	@AfterInject
+	public void init(){
+		datePickerDialog = new DatePickerDialog(this, this, 1992, 16, GregorianCalendar.JANUARY);
+	}
+	
+	@Click
+	public void showUnmappedUser(){
+		try{
+			mapper.unmap(root, person);
+			person.alert();
+		}catch(Throwable t){
+			new AlertDialog.Builder(this)
+				.setTitle(t.getMessage())
+				.show();
+			throw new RuntimeException(t);
+		}
+	}
+	
+	@Click
+	public void $birthday(){
+		datePickerDialog.show();
+	}
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
+		Date time = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault() );
+		$birthday.setText( formatter.format(time) );
+	}
+}

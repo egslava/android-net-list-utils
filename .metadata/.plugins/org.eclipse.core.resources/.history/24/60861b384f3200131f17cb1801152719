@@ -1,0 +1,14 @@
+package com.example.netutilssamples;
+
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+
+@EActivity(R.layout.activity_simple_mapping)
+public class SimpleMapping extends Activity {
+	@AfterViews
+	public void init(){
+		
+	}
+}

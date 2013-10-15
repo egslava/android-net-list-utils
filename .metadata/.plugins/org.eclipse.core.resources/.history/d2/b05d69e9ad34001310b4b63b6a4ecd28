@@ -1,0 +1,29 @@
+package com.example.netutilssamples;
+
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import ru.poloniumarts.netutils.ViewMapperAdapter;
+
+import com.example.netutilssamples.entities.Person;
+import com.example.netutilssamples.entities.Person_;
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.ListActivity;
+
+@EActivity
+public class SimpleListActivity extends ListActivity {
+	@Bean
+	ViewMapperAdapter<Person>	adapter;
+	
+	@AfterInject
+	void init(){
+		adapter.setObjects(people);
+		setListAdapter(adapter);
+	}
+	
+	List<Person> people = Person.generatePeople(100, this);
+}

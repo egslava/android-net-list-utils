@@ -1,0 +1,5 @@
+package ru.poloniumarts.netutils;
+
+public interface PreferencesCleaner {
+
+}

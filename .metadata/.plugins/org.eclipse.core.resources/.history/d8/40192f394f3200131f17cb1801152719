@@ -1,0 +1,19 @@
+package com.example.netutilssamples;
+
+import ru.poloniumarts.netutils.ViewMapper;
+
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+
+@EActivity(R.layout.activity_simple_mapping)
+public class SimpleMapping extends Activity {
+	@Bean
+	ViewMapper
+	
+	@AfterViews
+	public void init(){
+		
+	}
+}

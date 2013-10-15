@@ -1,0 +1,46 @@
+package com.example.netutilssamples;
+
+import ru.poloniumarts.netutils.SuperSimpleAdapter;
+
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Bean;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.ItemClick;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SimpleAdapter;
+
+@EActivity
+public class MainActivity extends ListActivity {
+
+	@Bean
+	SuperSimpleAdapter adapter;
+	private String[] rows = new String[] { "Simple mapping", "Simple unmapping" };
+
+	@AfterInject
+	public void init() {
+		adapter
+			.setLayout(android.R.layout.simple_list_item_1)
+			.setMap(new int[] { android.R.id.text1 })
+			.setItemsByRows(rows );
+		setListAdapter(adapter);
+	}
+
+	@ItemClick
+	public void listItemClicked(int position) {
+		switch (position) {
+		case 0:
+			SimpleMapping_.intent(this).start();
+			break;
+		}
+	}
+}

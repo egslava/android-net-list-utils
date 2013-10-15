@@ -1,0 +1,13 @@
+package ru.poloniumarts.netutils;
+
+import java.util.Collection;
+
+public class Utils {
+
+	/*only for utils methods */
+	private Utils() {}
+
+	static public boolean isEmpty(@SuppressWarnings("rawtypes") Collection collection){
+		return !(collection != null && !(collection.isEmpty()));
+	}
+}

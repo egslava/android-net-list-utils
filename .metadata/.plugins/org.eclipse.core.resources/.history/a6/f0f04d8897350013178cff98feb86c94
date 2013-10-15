@@ -1,0 +1,15 @@
+package com.example.netutilssamples;
+
+import com.googlecode.androidannotations.annotations.EActivity;
+
+import android.app.Activity;
+
+@EActivity
+public class ImageLoadingFallbackURL extends Activity{
+
+}
+
+class URLs{
+	public String realURL;
+	public String unrealURL;
+}
