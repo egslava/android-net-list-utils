@@ -34,13 +34,13 @@ public final class SimpleUnmapping_
     }
 
     private void init_(Bundle savedInstanceState) {
-        mapper = ViewMapper_.getInstance_(this);
         birthdayInputHelper = BirthdayInputHelper_.getInstance_(this);
+        mapper = ViewMapper_.getInstance_(this);
     }
 
     private void afterSetContentView_() {
-        $birthday = ((EditText) findViewById(id.$birthday));
         root = ((ViewGroup) findViewById(id.root));
+        $birthday = ((EditText) findViewById(id.$birthday));
         {
             View view = findViewById(id.showUnmappedUser);
             if (view!= null) {
@@ -56,8 +56,8 @@ public final class SimpleUnmapping_
                 );
             }
         }
-        ((ViewMapper_) mapper).afterSetContentView_();
         ((BirthdayInputHelper_) birthdayInputHelper).afterSetContentView_();
+        ((ViewMapper_) mapper).afterSetContentView_();
         init();
     }
 

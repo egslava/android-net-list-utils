@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lint>
-    <issue id="IconDensities" severity="ignore" />
-    <issue id="MissingRegistered" severity="ignore" />
-    <issue id="Overdraw" severity="ignore" />
-    <issue id="UnusedResources" severity="ignore" />
-</lint>

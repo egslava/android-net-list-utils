@@ -1,0 +1,24 @@
+#Android generated
+bin
+gen
+.metadata
+
+lint.xml
+
+#Eclipse
+.checkstyle
+.apt_generated
+
+#Ant
+build.xml
+ant.properties
+local.properties
+proguard.cfg
+proguard-project.txt
+
+#Other
+.DS_Store
+tmp
+*~
+.DS_store
+.DS_Store
