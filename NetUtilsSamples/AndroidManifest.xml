@@ -35,6 +35,8 @@
         <activity android:name="com.example.netutilssamples.ListWithLogic_"></activity>
         <activity android:name="com.example.netutilssamples.ComplexStructureActivity_"></activity>
         <activity android:name="com.example.netutilssamples.ImageLoadingFallbackId_"></activity>
+        <activity android:name="com.example.netutilssamples.DynamicListLoadingActivity_"></activity>
+        <activity android:name="com.example.netutilssamples.EnableableDemoActivity_"></activity>
     </application>
 
 </manifest>

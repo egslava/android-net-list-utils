@@ -17,7 +17,9 @@ public class MainActivity extends ListActivity {
 		{"Simple list", "ViewMapperAdapter"},
 		{"List with logic in list items", "ViewMapperAdapter and ItemViews"},
 		{"Complex structure", "Can't have logic (now)"},
-		{"Image loading (fallback url)", "ImageView tag for fallback id"} 
+		{"Image loading (fallback url)", "ImageView tag for fallback id"},
+		{"Dynamic list loading (pagination, etc)", "CursorScrollListener"},
+		{"Enabled and disabled items", "Enableable"},
 	};
 	
 	@Bean
@@ -52,6 +54,12 @@ public class MainActivity extends ListActivity {
 			break;
 		case 5:
 			ImageLoadingFallbackId_.intent(this).start();
+			break;
+		case 6:
+			DynamicListLoadingActivity_.intent(this).start();
+			break;
+		case 7:
+			EnableableDemoActivity_.intent(this).start();
 			break;
 		}
 	}

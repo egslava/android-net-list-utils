@@ -3,9 +3,11 @@ package com.example.netutilssamples.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.poloniumarts.netutils.CursorScrollListener.CursorScrollable;
+
 import android.content.Context;
 
-public class University{
+public class University {
 	public String	name;
 	public String	location;
 	public double	rating;

@@ -1,5 +1,0 @@
-package com.example.netutilssamples.entities;
-
-public class University{
-	public String	name;
-}

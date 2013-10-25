@@ -10,6 +10,8 @@ import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ru.poloniumarts.netutils.CursorScrollListener.CursorScrollable;
+
 import android.app.AlertDialog;
 import android.content.Context;
 
@@ -17,12 +19,19 @@ import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import com.googlecode.androidannotations.api.Scope;
 
-public class Person{
+public class Person implements CursorScrollable{
 	public String	avatar;
 	public Date		birthday;
 	public String	firstName;
 	public String	lastName;
 	public String	middleName;
+	
+	protected static int autoIncrement;
+	/** For supporting of list dynamic loading */
+	@Override
+	public int getId() {
+		return autoIncrement++;
+	}
 	
 	public void alert(Context context){
 		new AlertDialog.Builder(context)
