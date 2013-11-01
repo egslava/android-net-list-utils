@@ -26,11 +26,13 @@ public class Person implements CursorScrollable{
 	public String	lastName;
 	public String	middleName;
 	
-	protected static int autoIncrement;
+	public static int autoIncrement;
+	
+	public int id = autoIncrement++;
 	/** For supporting of list dynamic loading */
 	@Override
 	public int getId() {
-		return autoIncrement++;
+		return id;
 	}
 	
 	public void alert(Context context){
@@ -42,6 +44,11 @@ public class Person implements CursorScrollable{
 	
 	public static List<Person> generatePeople(int count, Context context){
 		ArrayList<Person> result = new ArrayList<Person>();
+		
+		if (autoIncrement > 250){
+			return result;
+		}
+		
 		Random random = new Random();
 		
 		for (int i = 0; i < count; i++){

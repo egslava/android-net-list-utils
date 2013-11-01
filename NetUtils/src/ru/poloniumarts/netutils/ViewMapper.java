@@ -176,7 +176,7 @@ public class ViewMapper {
 	}
 
 	public void map(View view, Object obj) {									
-		map(new AQuery(view), view, obj, new ArrayList<String>());
+		map(new AQuery(view), view, obj, new ArrayList<String>());			
 	}																			
 
 	public void map(AQuery aq, View view, Object obj) {							
