@@ -18,7 +18,7 @@ The repository contains NetUtilsSamples project. It contains few activities with
 1. [Dynamic list loading (pagination, etc)](net-utils-samples-dynamic-list-loading.markdown)
 1. [Enabled and disabled items](net-utils-samples-enabled-and-disabled-items.markdown)
 
-<a name="net-utils-samples-simple-mapping.markdown"></a>Simple Mapping
+<a name="net-utils-samples-simple-mapping.markdown">Simple Mapping</a>
 =======
 I will use __mapping__ in the context of NetUtils library a process of transportation data from object to an Interface. The code of SimpleMapping example is:
 
