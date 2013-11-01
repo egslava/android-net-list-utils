@@ -86,4 +86,4 @@ TextView that should display a Date field should also contain android:tag in its
 In that case it will accept some array of object that will be mapped with help of __ViewMapperAdapter__.
 
 # What's next?
-Try go throw [Simple unmapping example](net-utils-samples-simple-unmapping)!
+Try go throw [Simple unmapping example](net-utils-samples-simple-unmapping.markdown)!

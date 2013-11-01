@@ -1,6 +1,6 @@
 List with logic in its items
 =======
-In [previous tutorial](net-utils-samples-simple-list) we created a very simple list, **that can not**:
+In [previous tutorial](net-utils-samples-simple-list.markdown) we created a very simple list, **that can not**:
 
 1. Process events of view inside a list item. For example, if you have some buttons in your list view, you can't call "setOnClickListener" on them.
 2. Set an arbitrary layout.
@@ -94,4 +94,4 @@ After some processing you should map your object independently. In our case we d
 
 All the next code does a logic of ItemView and similar to casual AndroidAnnotations code.
 
-Go to the [next tutorial](net-utils-samples-mapping-of-complex-structures)!
+Go to the [next tutorial](net-utils-samples-mapping-of-complex-structures.markdown)!
