@@ -108,8 +108,6 @@ public class ImageUtils
 			while (options.outWidth * options.outHeight / (scale * scale) > memorySize) {
 				scale++;
 			}
-//			Log.d("", "scale = " + scale + ", orig-width: " + options.outWidth
-//					+ ", orig-height: " + options.outHeight);
 
 			inputStream = new FileInputStream(new File(path));
 			if (scale > 1) {
@@ -123,8 +121,6 @@ public class ImageUtils
 				// resize to desired dimensions
 				int height = bmp.getHeight();
 				int width = bmp.getWidth();
-//				Log.d("", "1th scale operation dimenions - width: " + width
-//						+ ", height: " + height);
 
 				double y = Math.sqrt(memorySize
 						/ (((double) width) / height));

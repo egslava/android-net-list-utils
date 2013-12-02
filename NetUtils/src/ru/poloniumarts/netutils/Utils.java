@@ -2,12 +2,12 @@ package ru.poloniumarts.netutils;
 
 import java.util.Collection;
 
-import com.jess.ui.TwoWayAbsListView;
-
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.jess.ui.TwoWayAbsListView;
 
 public class Utils {
 

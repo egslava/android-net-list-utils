@@ -1,14 +1,12 @@
 package ru.poloniumarts.netutils;
 
-import java.math.BigInteger;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
-import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
-import android.widget.RelativeLayout;
 
 @EViewGroup
 public class MapperItemView extends RelativeLayout implements ViewMapperItemView{
@@ -39,17 +37,10 @@ public class MapperItemView extends RelativeLayout implements ViewMapperItemView
 		};
 		
 		if (this.data != listItemData){
-			//TODO: remove this profile info
-			long startTime = System.nanoTime();
 			mapper.map(this, listItemData);
-			long endTime = System.nanoTime();
-			Log.e("map", "Aqquired " + (endTime - startTime) + " nanosec");
 			this.data = listItemData;
 		}
 		
 		return this;
 	}
-	BigInteger sumTime; //TODO: remove this
-	int			sumCount;//TODO: remove this
-	
 }

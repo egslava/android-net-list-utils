@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ru.poloniumarts.netutlis.BuildConfig;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
 // TODO: write doc
 /**
- * This class is used for...
+ * This class is used for safe progress dialog callings...
+ * Use this class instead of standard ProgressDialog
  * 
  * @author Вячеслав
  * 
@@ -109,23 +109,4 @@ public class ProgressDialogInstance {
 		}
 		return mapper.get(context);
 	}
-
-	// private ProgressDialog progressDialog;
-	// private void showProgressDialog() {
-	// // ProgressDialog.show(context, title, message)
-	// ProgressDialog.
-	// if(progressDialog != null){
-	// FragmentActivity activity = getActivity();
-	// String pleaseWait = activity.getString(R.string.please_wait);
-	// String sendingData = activity.getString(R.string.sending_data);
-	// progressDialog = ProgressDialog.show(activity, pleaseWait, sendingData);
-	// }
-	// }
-	// private void hideProgressDialog() {
-	// if (progressDialog == null){
-	// return;
-	// }
-	// progressDialog.cancel();
-	// progressDialog = null;
-	// }
 }

@@ -11,7 +11,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.text.GetChars;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -230,23 +229,16 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 	@Override
 	public int getPositionForSection(int section) {
 		return indexer.getPositionForSection(section);
-//		return Math.min(objects.size(), section);
 	}
 
 	@Override
 	public int getSectionForPosition(int position) {
 		return indexer.getSectionForPosition(position);
-//		return Math.min(objects.size(), position);
 	}
 
 	@Override
 	public Object[] getSections() {
 		return indexer.getSections();
-//		Integer[] result = new Integer[objects.size()];
-//		for(int i = 0; i < objects.size(); i++){
-//			result[i] = new Integer(i);
-//		}
-//		return result;
 	}
 	
 	public static class ViewMapperAdapterAlphabetSectionIndexer extends AlphabetSectionIndexer{

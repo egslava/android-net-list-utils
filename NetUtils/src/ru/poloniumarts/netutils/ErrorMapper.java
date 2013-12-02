@@ -209,10 +209,7 @@ public class ErrorMapper {
 						onClickListener.onClick(dialog, which);
 					}
 					cleaner.clear();
-//					LoginActivity_.intent(context)
-//					.flags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
-//					.startWithoutAutoLogin(true)
-//					.start();
+
 					if (activity != null){
 						activity.finish();
 					}

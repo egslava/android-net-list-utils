@@ -1,13 +1,13 @@
 package ru.poloniumarts.netutils;
 
-import com.androidquery.AQuery;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+
+import com.androidquery.AQuery;
 
 @SuppressLint("Registered")
 public class NetActivity extends Activity {

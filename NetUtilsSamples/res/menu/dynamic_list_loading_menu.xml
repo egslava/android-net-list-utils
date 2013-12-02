@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/FROM_BOTTOM_TO_TOP" android:title="FROM_BOTTOM_TO_TOP"></item>
-    <item android:id="@+id/FROM_TOP_TO_BOTTOM" android:title="FROM_TOP_TO_BOTTOM"></item>
-    
-
-</menu>
