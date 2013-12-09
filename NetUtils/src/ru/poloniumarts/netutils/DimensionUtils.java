@@ -18,8 +18,8 @@ public class DimensionUtils {
      * @param widthAspect Aspect ration for the view's width (e.g. 0.5f means "half the screen width")
      * @param heightAspect Aspect ration for the view's height (e.g. 0.5f means "half the screen width")
      */
-    public static void setViewSizeFromScreenWidth(Context context, View view, float widthAspect, float heightAspect) {
-        setViewSizeFromScreenWidth(context, view, widthAspect, heightAspect, 0, 0);
+    public static void setViewSizeFromScreenWidth(View view, float widthAspect, float heightAspect) {
+        setViewSizeFromScreenWidth(view, widthAspect, heightAspect, 0, 0);
     }
 
     /**
@@ -29,9 +29,9 @@ public class DimensionUtils {
      * @param reduceWidthDp after calculating width, reduce it to the given number of device independent pixels
      * @param reduceHeightDp after calculating height, reduce it to the given number of device independent pixels
      */
-    public static void setViewSizeFromScreenWidth(Context context, View view, float widthAspect, float heightAspect, int reduceWidthDp, int reduceHeightDp  ) {
+    public static void setViewSizeFromScreenWidth(View view, float widthAspect, float heightAspect, int reduceWidthDp, int reduceHeightDp  ) {
         DisplayMetrics metrics = new DisplayMetrics();
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager)view.getContext().getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
 
         ViewGroup.LayoutParams lp;
