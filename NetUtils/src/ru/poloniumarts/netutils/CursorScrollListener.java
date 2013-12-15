@@ -13,17 +13,18 @@ import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.api.Scope;
+
 import com.jess.ui.TwoWayAbsListView;
 
 @EBean(scope=Scope.Default)
-public class CursorScrollListener implements OnScrollListener, com.jess.ui.TwoWayAbsListView.OnScrollListener {
+public class CursorScrollListener implements OnScrollListener, TwoWayAbsListView.OnScrollListener {
 
 	public static final int EMPTY_ID = -1;
 	
 	public DataSource dataSource;
 
-	volatile public int smallestId = 	EMPTY_ID;
-	volatile public int largestId = 	EMPTY_ID;
+	volatile public long smallestId = 	EMPTY_ID;
+	volatile public long largestId = 	EMPTY_ID;
 	private boolean isLoading;
 
 	private boolean hasMoreDataUp = true;
@@ -116,7 +117,7 @@ public class CursorScrollListener implements OnScrollListener, com.jess.ui.TwoWa
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Background
-	void getNextDataPortion(int startId, String direction, ListAdapter listAdapter) {
+	void getNextDataPortion(long startId, String direction, ListAdapter listAdapter) {
 		if (listAdapter == null) {
 			throw new RuntimeException("Please! Set up listAdapter before call setOnScrollListener, loadNewier or loadOlder");
 		}
@@ -270,7 +271,7 @@ public class CursorScrollListener implements OnScrollListener, com.jess.ui.TwoWa
 	}
 
 	public interface DataSource {
-		public List<? extends CursorScrollable> getNextDataPortion(int startId, String direction);
+		public List<? extends CursorScrollable> getNextDataPortion(long startId, String direction);
 	}
 	
 	public interface OnDataLoadedListened{
@@ -285,6 +286,6 @@ public class CursorScrollListener implements OnScrollListener, com.jess.ui.TwoWa
 	}
 
 	public interface CursorScrollable {
-		public int getId();
+		public long getId();
 	}
 }
