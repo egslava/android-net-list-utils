@@ -1,9 +1,11 @@
 package ru.poloniumarts.netutils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,8 +74,13 @@ public class SuperSimpleAdapter extends BaseAdapter {
 	 * @return this
 	 */
 	public SuperSimpleAdapter setItemsByColumns(Object[]... items) {
-		this.items = convertRow(items);
-		transpose(items, this.items);
+		ArrayList<Object[]> result = new ArrayList<Object[]>(items[0].length);
+		for(int i = 0; i < items[0].length; i++){
+			result.add(new Object[items.length]);
+		}
+		
+		transpose(items, result);
+		this.items = result;
 		return this;
 	}
 	
@@ -166,7 +173,7 @@ public class SuperSimpleAdapter extends BaseAdapter {
 		return result;
 	}
 
-	static <T> void transpose(T[][] source, List<T[]> result) {
+	static <T> void transpose(T[][] source, List<Object[]> result) {
 		int srcWidth = source[0].length;
 		int srcHeight = source.length;
 		for (int i = 0; i < srcHeight; i++) {
@@ -273,13 +280,21 @@ public class SuperSimpleAdapter extends BaseAdapter {
 		return result;
 	}
 	
-	static private List<Object[]> convertRow(Object[][] src){
+	static private ArrayList<Object[]> convertRow(Object[][] src){
 		ArrayList<Object[]> result = new ArrayList<Object[]>(src.length);
 		
 		for (int i = 0; i < src.length; i++) {
-			result.add(src[i]);
+			result.add( downcastArray( src[i] ) );
 		}
 		
+		return result;
+	}
+	
+	static private Object[] downcastArray(Object[] array){
+		Object[] result = new Object[array.length];
+		for(int i = 0; i < array.length; i++){
+			result[i] = array[i];
+		}
 		return result;
 	}
 }
