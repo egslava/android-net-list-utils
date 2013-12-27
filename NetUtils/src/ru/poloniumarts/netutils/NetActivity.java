@@ -15,7 +15,7 @@ public class NetActivity extends Activity {
 	protected Handler handler = new Handler();
 	
 	protected static Integer progressBarId;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class NetActivity extends Activity {
 	
 	void tryToGetProgressBarId() {
 		if (progressBarId == null){
-			progressBarId = getResources().getIdentifier("progress", "id", getClass().getPackage().getName());
+			progressBarId = getResources().getIdentifier("progress", "id", getApplicationContext().getPackageName() );
 		}
 	}
 	

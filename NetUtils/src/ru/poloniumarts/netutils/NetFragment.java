@@ -23,7 +23,7 @@ public class NetFragment extends Fragment{
 	
 	void tryToGetProgressBarId() {
 		if (progressBarId == null){
-			progressBarId = getResources().getIdentifier("progress", "id", getClass().getPackage().getName());
+            progressBarId = getResources().getIdentifier("progress", "id", getActivity().getApplicationContext().getPackageName());
 		}
 	}
 	
@@ -44,6 +44,10 @@ public class NetFragment extends Fragment{
 	}
 	
 	public boolean isBlocked(){
-		return aq.id(progressBarId).getView().getVisibility()==View.GONE?true:false;
+        View view = aq.id(progressBarId).getView();
+        if (view != null && view.getVisibility() == View.VISIBLE) {
+            return true;
+        }
+        return false;
 	}
 }
