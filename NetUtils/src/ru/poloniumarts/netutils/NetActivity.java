@@ -23,6 +23,7 @@ public class NetActivity extends Activity {
 		tryToGetProgressBarId();
 		
 		aq = new AQuery(this);
+		progress(false);
 	}
 	
 	void tryToGetProgressBarId() {

@@ -19,6 +19,8 @@ public class NetFragment extends Fragment{
 		super.onResume();
 		tryToGetProgressBarId();
 		aq = new AQuery(getView());
+		
+		progress(false);
 	}
 	
 	void tryToGetProgressBarId() {
