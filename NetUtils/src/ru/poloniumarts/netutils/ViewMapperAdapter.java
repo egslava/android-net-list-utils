@@ -1,10 +1,21 @@
 package ru.poloniumarts.netutils;
 
 import java.lang.reflect.Method;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -20,13 +31,14 @@ import android.widget.SectionIndexer;
 import com.googlecode.androidannotations.annotations.AfterInject;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.hb.views.PinnedSectionListView.PinnedSectionListAdapter;
 
 //TODO: when android annotation 3.0 will be produced, do it class parameterized
 // ViewMapperAdapter<T> {
 // private List<T> objects = new ArrayList<T>();
 // }
 @EBean
-public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
+public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer, PinnedSectionListAdapter{
 
 	private static final String TAG = ViewMapperAdapter.class.getSimpleName();
 
@@ -37,10 +49,19 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 	public 	Object	listData;
 	private Class<?> controllerClass = null;
 	public	boolean	isItemsEnabled = true;
+	private    Integer viewTypeCount;
 	
 	private List<Object> filteredObjects;
 	
-	public ViewMapperAdapterAlphabetSectionIndexer indexer = new ViewMapperAdapterAlphabetSectionIndexer();
+	void setViewTypeCount(int viewTypeCount){
+	    if (this.viewTypeCount != null){
+	        throw new IllegalStateException("You're trying to set view type count when it's already been setted.");
+	    }
+	    this.viewTypeCount = viewTypeCount;
+	}
+	
+//	public ViewMapperSectionIndexer indexer = new ViewMapperAdapterAlphabetSectionIndexer();
+	public ViewMapperSectionIndexer indexer = new PinnedSectionIndexer();
 
 	@AfterInject
 	void init(){
@@ -49,6 +70,7 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 		    Bundle bundle = ai.metaData;
 		    itemViewPackage = bundle.getString("ViewMapperAdapter.itemViewsPackage");
 		} catch (NameNotFoundException e) {
+		    //TODO: solve this problem (meta-data is'nt so necessary now)
 			String	metaDataWarning = "<meta-data android:name=\"ViewMapperAdapter.itemViewsPackage\" android:value=\"com.path.to.itemview\" />";
 			Log.w(TAG, "Can't find package with item views. Please add that string to your AndroidManifest.xml:\n" + metaDataWarning);
 		} catch (NullPointerException e) {
@@ -85,6 +107,14 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 		}
 		return isItemsEnabled;
 	}
+	
+    @Override
+    public boolean isItemViewTypePinned(int viewType) {
+        buildClassesMap();
+        Class viewTypeClass = MapUtils.getElementByIndex(classesSet, viewType);
+        
+        return (viewTypeClass != null && Pinnable.class.isAssignableFrom( viewTypeClass ) );
+    };
 	
 	@Override
 	public int getCount() {
@@ -128,37 +158,44 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 	}
 	
 	@SuppressWarnings("rawtypes")
-	protected HashMap<Class, Integer> classesMap;
+	protected LinkedHashSet<Class> classesSet = new LinkedHashSet<Class>();
 	
 	public String itemViewPackage;
 	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public int getViewTypeCount() {
-		classesMap	= new HashMap<Class, Integer>();
-
-		int count = 0;
-		
-		List<? extends Object> objects = filteredObjects != null? filteredObjects : getObjects();
-		for (Object object : objects) {
-			if (!classesMap.containsKey(object.getClass())){
-				classesMap.put(object.getClass(), count);
-				count ++;
-			}
-		}
+	    if (viewTypeCount != null){
+	        return viewTypeCount;
+	    }
+	    
+		buildClassesMap();
 		
 		/*This method shouldn't return 0 if list is empty
 		 * Minimal value for result is 1. Event if the list is empty */
-		return Math.max( classesMap.size(), 1);
+		
+		viewTypeCount = Math.max( classesSet.size(), 1);
+		return viewTypeCount;
 	}
+
+    private void buildClassesMap() {
+        int count = 0;
+		
+		List<? extends Object> objects = filteredObjects != null? filteredObjects : getObjects();
+		for (Object object : objects) {
+		    classesSet.add(object.getClass());
+		}
+		
+		if (viewTypeCount != null && classesSet.size() > viewTypeCount){
+		    throw new IllegalStateException("Your data has more item view types than you declared. Your data has " + classesSet.size() + " different types and you declared only " + viewTypeCount + " view types");
+		}
+    }
 	
 	@Override
 	public int getItemViewType(int position) {
-		if (classesMap == null){
-			return 0;
-		}
+	    buildClassesMap();
 		
-		Integer value = classesMap.get(getItem(position).getClass());
+		Integer value = ArrayUtils.indexOf(classesSet.toArray(), getItem(position).getClass() );  // index of a class in a set
 		return value != null ? value : 0;
 	}
 
@@ -212,7 +249,7 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 	 * @param position
 	 *            position of item in the list
 	 * @param view
-	 *            chached view
+	 *            cached view
 	 * @return true if invalid, false otherwise
 	 */
 	public boolean isItInvalidItemView(int position, View view) {
@@ -274,6 +311,76 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer{
 	
 	public static interface Indexerable{
 		public char getFirstLetter(int position);
-	};
+	}
+	
+    public class PinnedSectionIndexer implements ViewMapperSectionIndexer{
+        
+        @Override
+        public int getPositionForSection(int sectionIndex) {
+            int positionForSection = -1;
+            int section            = -1;
+            
+            for (Object object : objects) {
+                if (object instanceof Pinnable){
+                    section += 1;
+                }
+                
+                positionForSection += 1;
+                
+                if (section == sectionIndex){
+                    break;
+                }
+            }
+            
+            return positionForSection;
+        }
+    
+        @Override
+        public int getSectionForPosition(int position) {
+            if (position >= objects.size()){
+                throw new InvalidParameterException("Position of the element is " + position + ", but the total size is " + objects.size() + ". ");
+            }
+            
+            int     section             = -1;
+            
+            for (int i = 0; i < position; i++){
+                if (objects.get(i) instanceof Pinnable){
+                    section += 1;
+                }
+            }
+            
+            return section;
+        }
+    
+        @Override
+        public Object[] getSections() {
+            List<Object> sections = new ArrayList<Object>();
+            for (Object object : objects) {
+                if (object instanceof Pinnable) {
+                    sections.add(object);
+                }
+            }
+            return sections.toArray();
+        }
 
+        @Override
+        public void notifyDataSetChanged() {
+        }
+    }
+}
+
+class MapUtils{
+    public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+        for (Entry<T, E> entry : map.entrySet()) {
+            if (value.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static <T> T getElementByIndex(Set<T> set, int index) {
+        return (T) set.toArray()[index];
+    }
 }

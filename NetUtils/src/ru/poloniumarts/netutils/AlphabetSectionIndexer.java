@@ -11,7 +11,7 @@ import android.widget.SectionIndexer;
  * @author egslava
  *
  */
-public abstract class AlphabetSectionIndexer implements SectionIndexer{
+public abstract class AlphabetSectionIndexer implements ViewMapperSectionIndexer{
 
 	abstract public char getFirstLetter(int position);
 	abstract public int	size();

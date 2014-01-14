@@ -49,14 +49,20 @@ public class CursorScrollListener implements OnScrollListener, TwoWayAbsListView
 	protected boolean scrollBlock;
 	
 	/** (!!!) <b>Attention!</b> It override your list onScrollListener */
-	public void init(ListType listType, DataSource	dataSource, AbsListView absListView){
-		this.listType = listType;
-		this.dataSource = dataSource;
-		this.absListView = absListView;
-		Utils.setAdapter(absListView, adapter);
-		absListView.setOnScrollListener(this);
-		this.twoWayAbsListView = null;
+	public void init(ListType listType, DataSource	dataSource, AbsListView absListView, int viewTypeCount){
+	    adapter.setViewTypeCount(viewTypeCount);
+		init(listType, dataSource, absListView);
 	}
+	
+    public void init(ListType listType, DataSource  dataSource, AbsListView absListView){
+        this.listType = listType;
+        this.dataSource = dataSource;
+        this.absListView = absListView;
+        
+        Utils.setAdapter(absListView, adapter);
+        absListView.setOnScrollListener(this);
+        this.twoWayAbsListView = null;
+    }
 	
 	/** (!!!) <b>Attention!</b> It override your list onScrollListener */
 	public void init(ListType listType, DataSource	dataSource, TwoWayAbsListView twoWayAbsListView){
