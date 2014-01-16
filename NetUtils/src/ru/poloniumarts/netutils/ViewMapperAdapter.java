@@ -1,19 +1,14 @@
 package ru.poloniumarts.netutils;
 
 import java.lang.reflect.Method;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -45,13 +40,13 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
 	@RootContext
 	Context	context;
 	
-	private List<T> objects = new ArrayList<T>();
+	private CopyOnWriteArrayList<T> objects = new CopyOnWriteArrayList<T>();
 	public 	Object	listData;
 	private Class<?> controllerClass = null;
 	public	boolean	isItemsEnabled = true;
 	private    Integer viewTypeCount;
 	
-	private List<Object> filteredObjects;
+	private CopyOnWriteArrayList<Object> filteredObjects; //fixes ConcurrentModificationException in PinnedSectionListView
 	
 	void setViewTypeCount(int viewTypeCount){
 	    if (this.viewTypeCount != null){
@@ -96,7 +91,9 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
 			this.objects.clear();
 			return;
 		}
-		this.objects = objects;
+		
+		//fixes ConcurrentModificationException in PinnedSectionListView
+		this.objects = new CopyOnWriteArrayList<T>(objects);
 	}
 	
 	@Override
@@ -158,7 +155,7 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
 	}
 	
 	@SuppressWarnings("rawtypes")
-	protected LinkedHashSet<Class> classesSet = new LinkedHashSet<Class>();
+	protected CopyOnWriteArraySet<Class> classesSet = new CopyOnWriteArraySet<Class>();    //fixes ConcurrentModificationException in PinnedSectionListView
 	
 	public String itemViewPackage;
 	
@@ -181,7 +178,8 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
     private void buildClassesMap() {
         int count = 0;
 		
-		List<? extends Object> objects = filteredObjects != null? filteredObjects : getObjects();
+        //toArray to fix ConcurrentModificationException
+		Object[] objects = (  filteredObjects != null? filteredObjects : getObjects() ).toArray();
 		for (Object object : objects) {
 		    classesSet.add(object.getClass());
 		}
@@ -223,25 +221,28 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
 		public boolean remain(Object object);
 	}
 	
-	synchronized public void setFilter(Filter filter){
-		
-		if (filter == null){
-			filteredObjects = null;
-		}else{
-			try{
-				filteredObjects = new ArrayList<Object>();
-				for (Object object: getObjects()) {
-					if (filter.remain(object)){
-						filteredObjects.add(object);
-					}
-				}
-			}catch(ConcurrentModificationException e){
-				e.printStackTrace();
-			}
-		}
-		
-		notifyDataSetChanged();
-	}
+    synchronized public void setFilter(Filter filter) {
+
+        if (filter == null) {
+            filteredObjects = null;
+        } else {
+            try {
+
+                // fixes ConcurrentModificationException in
+                // PinnedSectionListView
+                filteredObjects = new CopyOnWriteArrayList<Object>();
+                for (Object object : getObjects()) {
+                    if (filter.remain(object)) {
+                        filteredObjects.add(object);
+                    }
+                }
+            } catch (ConcurrentModificationException e) {
+                e.printStackTrace();
+            }
+        }
+
+        notifyDataSetChanged();
+    }
 
 	/**
 	 * Checks if cached by list view is invalid for current position
@@ -320,7 +321,8 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
             int positionForSection = -1;
             int section            = -1;
             
-            for (Object object : objects) {
+            // toArray to fix ConcurrentModificationException
+            for (Object object : objects.toArray()) {
                 if (object instanceof Pinnable){
                     section += 1;
                 }
@@ -354,7 +356,9 @@ public class ViewMapperAdapter<T> extends BaseAdapter implements SectionIndexer,
     
         @Override
         public Object[] getSections() {
-            List<Object> sections = new ArrayList<Object>();
+            // fixes ConcurrentModificationException in PinnedSectionListView
+            List<Object> sections = new CopyOnWriteArrayList<Object>();
+            
             for (Object object : objects) {
                 if (object instanceof Pinnable) {
                     sections.add(object);
