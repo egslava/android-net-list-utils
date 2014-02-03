@@ -1,5 +1,6 @@
 apply plugin: 'android-library'
 //apply plugin: 'android-apt'
+//apply plugin: 'android-apt'
 //
 //apt{
 //    arguments{
@@ -9,9 +10,13 @@ apply plugin: 'android-library'
 //}
 
 dependencies {
+
     compile 'com.android.support:support-v4:13+'
+//    apt "com.googlecode.androidannotations:androidannotations:${androidAnnotationsVersion}"
+//    compile "com.googlecode.androidannotations:androidannotations-api:${androidAnnotationsVersion}"
 //    compile 'org.springframework.android:spring-android-rest-template:1.0.2.BUILD-SNAPSHOT'
 //    compile 'org.springframework.android:spring-android-core:1.0.2.BUILD-SNAPSHOT'
+    compile "com.googlecode.androidannotations:androidannotations-api:${androidAnnotationsVersion}"
     compile group: 'org.springframework.android', name: 'spring-android-core', version: '1.0.1.RELEASE'
     compile group: 'org.springframework.android', name: 'spring-android-rest-template', version: '1.0.1.RELEASE'
     compile fileTree(dir: 'libs', include: '*.jar')
