@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\Вячеслав\git\payler-for-android\android-net-list-utils\NetUtils\res" >
+            <file
+                name="fake"
+                path="C:\Users\Вячеслав\git\payler-for-android\android-net-list-utils\NetUtils\res\layout\fake.xml"
+                qualifiers=""
+                type="layout" />
+        </source>
+        <source path="C:\Users\Вячеслав\git\payler-for-android\android-net-list-utils\NetUtils\build\res\rs\release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="C:\Users\Вячеслав\git\payler-for-android\android-net-list-utils\NetUtils\build-types\release\res" />
+    </dataSet>
+
+</merger>
