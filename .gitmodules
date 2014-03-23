@@ -1,6 +1,6 @@
 [submodule "two-way-gridview"]
 	path = two-way-gridview
-	url = https://github.com/jess-anders/two-way-gridview.git
+	url = git@github.com:egslava/two-way-gridview.git
 [submodule "pinned-section-listview"]
 	path = pinned-section-listview
-	url = git@github.com:beworker/pinned-section-listview.git
+	url = git@github.com:egslava/pinned-section-listview.git
